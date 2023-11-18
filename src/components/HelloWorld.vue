@@ -26,16 +26,18 @@
 
 <script setup>
 import { ref } from 'vue';
-const todoList = ref([])
+const todoList = ref(JSON.parse(localStorage.getItem('todoData')) || [])
 const newTodoText = ref('')
 
 function addTodo() {
   todoList.value.push(newTodoText.value);
   newTodoText.value = '';
+  localStorage.setItem('todoData', JSON.stringify(todoList.value))
 }
 
 function removeTodo(index) {
   todoList.value.splice(index, 1);
+  localStorage.setItem('todoData', JSON.stringify(todoList.value))
 }
 </script>
 
